@@ -1,0 +1,3 @@
+[submodule "Emitium"]
+	path = Emitium
+	url = https://github.com/Xobtah/Emitium.git
