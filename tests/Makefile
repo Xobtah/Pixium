@@ -3,6 +3,7 @@ NAME	= WindowTest
 SRC	= main.cpp \
 	../src/Window.cpp \
 	../Emitium/src/EventEmitter.cpp \
+	../Poolium/src/Thread.cpp \
 
 OBJ	= $(SRC:.cpp=.o)
 

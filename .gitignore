@@ -1,4 +1,3 @@
 .idea/
 *.o
 tests/WindowTest
-Emitium/

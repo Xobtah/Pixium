@@ -9,10 +9,12 @@
 int main()
 {
     Pixium::Window  win;
-    bool            running = true;
 
-    win.On("Quit", [&]() { running = false; }).On("Escape", [&]() { win.Emit("Quit"); });
-    while (running)
-        win.HandleEvents();
+    win.On("Escape", [&]() { win.Stop(); });
+    for (int x = 0; x < 640; x++)
+        for (int y = 0; y < 480; y++)
+            win.Draw(x, y, Pixium::Window::Color(255, 0, 0));
+    while (win.IsRunning())
+        win.Display();
     return (0);
 }

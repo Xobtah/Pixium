@@ -6,11 +6,12 @@
 #define PIXIUM_WINDOW_HPP
 
 #include <string>
-
+#include <map>
 #include <exception>
 #include <SDL2/SDL.h>
 
 #include "../Emitium/src/EventEmitter.hpp"
+#include "../Poolium/src/Thread.hpp"
 
 namespace Pixium
 {
@@ -29,15 +30,33 @@ namespace Pixium
     class   Window : public Emitium::EventEmitter
     {
     public:
-        Window(int sizeX = 640, int sizeY = 480, std::string title = "Untitled", int positionFlag = SDL_WINDOWPOS_CENTERED);
+        Window(unsigned int sizeX = 640, unsigned int sizeY = 480, std::string title = "Untitled", int positionFlag = SDL_WINDOWPOS_CENTERED);
         ~Window();
 
-        Window  &HandleEvents();
+        Window  &Display();
+        Window  &Draw(unsigned int, unsigned int, uint32_t);
+        Window  &Stop();
+
+        bool    IsRunning() const;
+
+        static uint32_t Color(uint8_t, uint8_t, uint8_t, uint8_t opacity = 255);
 
     private:
         SDL_Window      *_win;
         SDL_Renderer    *_ren;
+        SDL_Texture     *_tex;
         SDL_Event       _eve;
+
+        unsigned int    _winSizeX;
+        unsigned int    _winSizeY;
+        uint32_t        *_pixels;
+
+        bool            _isRunning;
+        Poolium::Thread _thread;
+        std::map<int, std::string>  _keyMap;
+
+        void    InitKeyMap();
+        void    HandleEvents();
     };
 }
 
