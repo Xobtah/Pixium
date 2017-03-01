@@ -36,6 +36,8 @@ namespace Pixium
         Window  &Display();
         Window  &Draw(unsigned int, unsigned int, uint32_t);
         Window  &Stop();
+        Window  &SetMaxFps(unsigned int maxFps = 60);
+        unsigned int    GetFps() const;
 
         bool    IsRunning() const;
 
@@ -54,6 +56,13 @@ namespace Pixium
         bool            _isRunning;
         Poolium::Thread _thread;
         std::map<int, std::string>  _keyMap;
+        std::map<int, std::string>  _mouseMap;
+
+        unsigned int    _maxFps;
+        unsigned int    _lastTick;
+        unsigned int    _fpsCounter;
+        unsigned int    _fpsTimeCounter;
+        unsigned int    _lastSecondFps;
 
         void    InitKeyMap();
         void    HandleEvents();
