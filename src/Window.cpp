@@ -6,7 +6,7 @@
 
 #include "Window.hpp"
 
-namespace Pixium
+namespace ium
 {
     /*
      *  Ctor & Dtor
@@ -152,12 +152,12 @@ namespace Pixium
                 case SDL_KEYDOWN:
                     this->Emit("Keydown");
                     if (_keyMap.find(_eve.key.keysym.sym) != _keyMap.end())
-                        this->Emit("d_" + _keyMap[_eve.key.keysym.sym]);
+                        this->Emit(_keyMap[_eve.key.keysym.sym], true);
                     break;
                 case SDL_KEYUP:
                     this->Emit("Keyup");
                     if (_keyMap.find(_eve.key.keysym.sym) != _keyMap.end())
-                        this->Emit("u_" + _keyMap[_eve.key.keysym.sym]);
+                        this->Emit(_keyMap[_eve.key.keysym.sym], false);
                     break;
                 case SDL_MOUSEMOTION:
                     this->Emit("MouseMotion", _eve.motion.x, _eve.motion.y);
@@ -165,12 +165,12 @@ namespace Pixium
                 case SDL_MOUSEBUTTONDOWN:
                     this->Emit("MouseButtonDown", _eve.motion.x, _eve.motion.y);
                     if (_keyMap.find(_eve.button.button) != _keyMap.end())
-                        this->Emit("d_" + _keyMap[_eve.button.button], _eve.button.x, _eve.button.y);
+                        this->Emit(_keyMap[_eve.button.button], true, _eve.button.x, _eve.button.y);
                     break;
                 case SDL_MOUSEBUTTONUP:
                     this->Emit("MouseButtonUp", _eve.motion.x, _eve.motion.y);
                     if (_keyMap.find(_eve.button.button) != _keyMap.end())
-                        this->Emit("u_" + _keyMap[_eve.button.button], _eve.button.x, _eve.button.y);
+                        this->Emit(_keyMap[_eve.button.button], false, _eve.button.x, _eve.button.y);
                     break;
                 default:
                     break;

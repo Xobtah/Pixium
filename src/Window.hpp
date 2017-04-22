@@ -13,7 +13,7 @@
 #include "../Emitium/src/EventEmitter.hpp"
 #include "../Poolium/src/Thread.hpp"
 
-namespace Pixium
+namespace ium
 {
     class WindowException : public std::exception
     {
@@ -27,7 +27,7 @@ namespace Pixium
         std::string _what;
     };
 
-    class   Window : public Emitium::EventEmitter
+    class   Window : public ium::EventEmitter
     {
     public:
         Window(unsigned int sizeX = 640, unsigned int sizeY = 480, std::string title = "Untitled", int positionFlag = SDL_WINDOWPOS_CENTERED);
