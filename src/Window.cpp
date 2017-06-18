@@ -33,6 +33,7 @@ namespace ium
 
     Window::~Window()
     {
+        _isRunning = false;
         delete[] _pixels;
         SDL_DestroyTexture(_tex);
         SDL_DestroyRenderer(_ren);
