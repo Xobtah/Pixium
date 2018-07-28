@@ -1,6 +1,3 @@
-[submodule "Emitium"]
-	path = Emitium
-	url = https://github.com/Xobtah/Emitium.git
 [submodule "Poolium"]
 	path = Poolium
 	url = https://github.com/Xobtah/Poolium.git

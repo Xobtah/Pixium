@@ -108,36 +108,40 @@ namespace ium
 
     void    Window::InitKeyMap()
     {
-        _keyMap[SDLK_ESCAPE] = "Escape";
-        _keyMap[SDLK_SPACE] = "Space";
-        _keyMap[SDLK_z] = "a";
-        _keyMap[SDLK_z] = "b";
-        _keyMap[SDLK_z] = "c";
-        _keyMap[SDLK_z] = "d";
-        _keyMap[SDLK_z] = "e";
-        _keyMap[SDLK_z] = "f";
-        _keyMap[SDLK_z] = "g";
-        _keyMap[SDLK_z] = "h";
-        _keyMap[SDLK_z] = "i";
-        _keyMap[SDLK_z] = "j";
-        _keyMap[SDLK_z] = "k";
-        _keyMap[SDLK_z] = "l";
-        _keyMap[SDLK_z] = "m";
-        _keyMap[SDLK_z] = "n";
-        _keyMap[SDLK_z] = "o";
-        _keyMap[SDLK_z] = "p";
-        _keyMap[SDLK_z] = "q";
-        _keyMap[SDLK_z] = "r";
-        _keyMap[SDLK_z] = "s";
-        _keyMap[SDLK_z] = "t";
-        _keyMap[SDLK_z] = "u";
-        _keyMap[SDLK_z] = "v";
-        _keyMap[SDLK_z] = "w";
-        _keyMap[SDLK_z] = "x";
-        _keyMap[SDLK_z] = "y";
-        _keyMap[SDLK_z] = "z";
-        _keyMap[SDL_BUTTON_LEFT] = "ButtonLeft";
-        _keyMap[SDL_BUTTON_RIGHT] = "ButtonRight";
+        _keyMap[SDLK_ESCAPE] = KeyCode::ESCAPE;
+        _keyMap[SDLK_SPACE] = KeyCode::SPACE;
+        _keyMap[SDLK_a] = KeyCode::a;
+        _keyMap[SDLK_b] = KeyCode::b;
+        _keyMap[SDLK_c] = KeyCode::c;
+        _keyMap[SDLK_d] = KeyCode::d;
+        _keyMap[SDLK_e] = KeyCode::e;
+        _keyMap[SDLK_f] = KeyCode::f;
+        _keyMap[SDLK_g] = KeyCode::g;
+        _keyMap[SDLK_h] = KeyCode::h;
+        _keyMap[SDLK_i] = KeyCode::i;
+        _keyMap[SDLK_j] = KeyCode::j;
+        _keyMap[SDLK_k] = KeyCode::k;
+        _keyMap[SDLK_l] = KeyCode::l;
+        _keyMap[SDLK_m] = KeyCode::m;
+        _keyMap[SDLK_n] = KeyCode::n;
+        _keyMap[SDLK_o] = KeyCode::o;
+        _keyMap[SDLK_p] = KeyCode::p;
+        _keyMap[SDLK_q] = KeyCode::q;
+        _keyMap[SDLK_r] = KeyCode::r;
+        _keyMap[SDLK_s] = KeyCode::s;
+        _keyMap[SDLK_t] = KeyCode::t;
+        _keyMap[SDLK_u] = KeyCode::u;
+        _keyMap[SDLK_v] = KeyCode::v;
+        _keyMap[SDLK_w] = KeyCode::w;
+        _keyMap[SDLK_x] = KeyCode::x;
+        _keyMap[SDLK_y] = KeyCode::y;
+        _keyMap[SDLK_z] = KeyCode::z;
+        _keyMap[SDLK_LEFT] = KeyCode::LEFT;
+        _keyMap[SDLK_RIGHT] = KeyCode::RIGHT;
+        _keyMap[SDLK_UP] = KeyCode::UP;
+        _keyMap[SDLK_DOWN] = KeyCode::DOWN;
+        _keyMap[SDL_BUTTON_LEFT] = KeyCode::MOUSELEFT;
+        _keyMap[SDL_BUTTON_RIGHT] = KeyCode::MOUSERIGHT;
     }
 
     void    Window::HandleEvents()
@@ -146,31 +150,26 @@ namespace ium
             switch (_eve.type)
             {
                 case SDL_QUIT:
-                    this->Emit("Quit");
                     this->Stop();
                     break;
                 case SDL_KEYDOWN:
-                    this->Emit("Keydown");
                     if (_keyMap.find(_eve.key.keysym.sym) != _keyMap.end())
-                        this->Emit(_keyMap[_eve.key.keysym.sym], true);
+                        this->OnKeydown(_keyMap[_eve.key.keysym.sym]);
                     break;
                 case SDL_KEYUP:
-                    this->Emit("Keyup");
                     if (_keyMap.find(_eve.key.keysym.sym) != _keyMap.end())
-                        this->Emit(_keyMap[_eve.key.keysym.sym], false);
+                        this->OnKeyup(_keyMap[_eve.key.keysym.sym]);
                     break;
                 case SDL_MOUSEMOTION:
-                    this->Emit("MouseMotion", _eve.motion.x, _eve.motion.y);
+                    this->OnMouseMotion(_eve.motion.x, _eve.motion.y);
                     break;
                 case SDL_MOUSEBUTTONDOWN:
-                    this->Emit("MouseButtonDown", _eve.motion.x, _eve.motion.y);
                     if (_keyMap.find(_eve.button.button) != _keyMap.end())
-                        this->Emit(_keyMap[_eve.button.button], true, _eve.button.x, _eve.button.y);
+                        this->OnMouseDown(_keyMap[_eve.button.button], _eve.button.x, _eve.button.y);
                     break;
                 case SDL_MOUSEBUTTONUP:
-                    this->Emit("MouseButtonUp", _eve.motion.x, _eve.motion.y);
                     if (_keyMap.find(_eve.button.button) != _keyMap.end())
-                        this->Emit(_keyMap[_eve.button.button], false, _eve.button.x, _eve.button.y);
+                        this->OnMouseUp(_keyMap[_eve.button.button], _eve.button.x, _eve.button.y);
                     break;
                 default:
                     break;
