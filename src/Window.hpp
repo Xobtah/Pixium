@@ -59,7 +59,6 @@ namespace ium
         virtual void OnMouseDown(KeyCode kc, int x, int y) {}
         virtual void OnMouseUp(KeyCode kc, int x, int y) {}
 
-    private:
         SDL_Window      *_win;
         SDL_Renderer    *_ren;
         SDL_Texture     *_tex;
